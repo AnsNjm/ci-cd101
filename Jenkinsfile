@@ -16,7 +16,16 @@ pipeline {
 
         stage('Push Image') {
             steps {
-                sh 'docker push anassnajam/react-app:latest'
+                // Use Jenkins credentials for Docker Hub
+                withCredentials([usernamePassword(credentialsId: '64946df4-9eab-4748-9388-dfde23bd1548', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                        # Log in to Docker Hub
+                        echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+
+                        # Push the Docker image
+                        docker push anassnajam/react-app:latest
+                    '''
+                }
             }
         }
 
