@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone') {
+        stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/AnsNjm/ci-cd101'
+                checkout scm
             }
         }
 
