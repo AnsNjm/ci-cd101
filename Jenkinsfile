@@ -4,19 +4,19 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/yourusername/yourapp.git'
+                git 'https://github.com/AnsNjm/ci-cd101'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t yourusername/demo-app:latest .'
+                sh 'docker build -t anassnajam/react-app:latest .'
             }
         }
 
         stage('Push Image') {
             steps {
-                sh 'docker push yourusername/demo-app:latest'
+                sh 'docker push anassnajam/react-app:latest'
             }
         }
 
