@@ -29,6 +29,15 @@ pipeline {
             }
         }
 
+        stage('Check Kubectl & Paths') {
+            steps {
+                sh 'ls -R'
+                sh 'kubectl version --client'
+                sh 'kubectl apply -f k8s/deployment.yaml --dry-run=client'
+            }
+        }
+
+
         stage('Deploy with Ansible') {
             steps {
                 sh 'ansible-playbook ansible/deploy.yml'
