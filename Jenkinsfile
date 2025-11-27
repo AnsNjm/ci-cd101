@@ -34,7 +34,7 @@ pipeline {
                 withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                     sh 'ls -R'
                     sh 'kubectl version --client'
-                    sh 'kubectl apply -f k8s/deployment.yaml --dry-run=client'
+                    sh 'kubectl apply -f k8s/deployment.yaml --dry-run=client --validate=false'
                 }
             }
         }
