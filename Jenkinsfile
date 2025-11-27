@@ -31,16 +31,19 @@ pipeline {
 
         stage('Check Kubectl & Paths') {
             steps {
-                sh 'ls -R'
-                sh 'kubectl version --client'
-                sh 'kubectl apply -f k8s/deployment.yaml --dry-run=client'
+                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                    sh 'ls -R'
+                    sh 'kubectl version --client'
+                    sh 'kubectl apply -f k8s/deployment.yaml --dry-run=client'
+                }
             }
         }
 
-
         stage('Deploy with Ansible') {
             steps {
-                sh 'ansible-playbook ansible/deploy.yml'
+                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                    sh 'ansible-playbook ansible/deploy.yml'
+                }
             }
         }
     }
