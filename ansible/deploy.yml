@@ -1,7 +1,7 @@
 - hosts: localhost
   tasks:
     - name: Apply Kubernetes deployment
-      command: kubectl apply -f k8s/deployment.yaml --dry-run=client --validate=false
+      command: kubectl apply -f ../k8s/deployment.yaml --dry-run=client --validate=false
 
     - name: Apply Kubernetes service
       command: kubectl apply -f ../k8s/service.yaml --validate=false
