@@ -13,7 +13,7 @@ RUN npm ci
 #Rest of frontend code
 COPY . .
 
-EXPOSE 3000
+EXPOSE 5000
 
 #Running server
 CMD ["npm", "start"]
